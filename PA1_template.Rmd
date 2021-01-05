@@ -34,7 +34,7 @@ summary(monitor_data_na_rm)
 
 # What is mean total number of steps taken per day?
 #### 1. Make a histogram of the total number of steps taken each day
-```{r echo=T}
+```{r Histogram - Total Steps per day,echo=T}
 daily_monitor_data <- monitor_data_na_rm %>%
   group_by(date) %>%
   summarize(steps=sum(steps))
@@ -53,7 +53,7 @@ summary(daily_monitor_data$steps)
 
 ## What is the average daily activity pattern?
 #### 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
-```{r echo=T}
+```{r Line plot - Avg steps per interval,echo=T}
 interval_monitor_data <- monitor_data_na_rm %>% 
     group_by(interval) %>% 
     summarize(steps = mean(steps))
@@ -79,7 +79,7 @@ x
 **number of NA rows = (`r toString(x)`)**
 
 #### 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
-```{r echo=T}
+```{r Missing Data Visualization,echo=T}
 library("VIM")
 na_pattern <-summary(aggr(monitor_data, sortVar=TRUE))$steps
 ```
@@ -97,7 +97,7 @@ head(monitor_data_impute)
 ```
 
 #### 4. Make a histogram of the total number of steps taken each day and calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
-```{r echo=T}
+```{r Histogram - Total Steps per day including imputated values,echo=T}
 daily_monitor_data_impute <- monitor_data_impute %>% 
     group_by(date) %>% 
     summarize(steps = sum(steps))
@@ -124,7 +124,7 @@ y
 ```
 
 #### 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). See the README file in the GitHub repository to see an example of what this plot should look like using simulated data.
-```{r echo=T}
+```{r Line plots - Weekend and Weekday interval step patterns,echo=T}
 interval_monitor_wk <- interval_data_wk %>% 
     group_by(interval, day_of_wk) %>% 
     summarize(steps = mean(steps))
@@ -137,6 +137,3 @@ ggplot(data=interval_monitor_wk, aes(x=interval,y=steps)) + geom_line() +
   facet_grid(day_of_wk ~ ., scales = "fixed") + theme(legend.position = "none")
 ```
 **From the line plots, we can clearly see that there is an enormous difference in interval step patterns between "weekday" and "weekend" days, with the latter showing decreased walking in the mornings and evenings, and increased steps during the day (with the reversal being true for "weekdays"). The area under the curve (signifying average overall walking distance per day) appears fairly comparable between groups.**
-
-knit2html("PA1_template.Rmd")
-knit2html
