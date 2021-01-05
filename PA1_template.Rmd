@@ -4,9 +4,10 @@ output:
   html_document:
     keep_md: true
 ---
-*"tidyverse" and "VIM" packages were used in the construction of this markdown file. To install, use the install.packages() command for each respective package*
+*"tidyverse", "VIM", and "knitr" packages were used in the construction of this markdown file. To install, use the install.packages() command for each respective package*
 
 ```{r}
+library(knitr)
 knitr::opts_chunk$set(message = F, warning=F, echo=T)
 library("tidyverse")
 ```
@@ -137,3 +138,5 @@ ggplot(data=interval_monitor_wk, aes(x=interval,y=steps)) + geom_line() +
 ```
 **From the line plots, we can clearly see that there is an enormous difference in interval step patterns between "weekday" and "weekend" days, with the latter showing decreased walking in the mornings and evenings, and increased steps during the day (with the reversal being true for "weekdays"). The area under the curve (signifying average overall walking distance per day) appears fairly comparable between groups.**
 
+knit2html("PA1_template.Rmd")
+knit2html
